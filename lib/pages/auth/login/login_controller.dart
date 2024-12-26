@@ -1,3 +1,4 @@
+import 'package:fitness_tracker/bindings/all_bindings.dart';
 import 'package:fitness_tracker/core/singleton.dart';
 import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
@@ -54,7 +55,7 @@ class LoginController extends GetxController {
           print('Đăng nhập ${value.toString()}');
           Singleton().saveLogin(value!);
           DialogUtil.hideLoading();
-          Get.offAllNamed(BottomNavPage.routeName);
+          Get.offAndToNamed(BottomNavPage.routeName);
         },
       );
     } catch (e) {

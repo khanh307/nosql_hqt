@@ -33,64 +33,80 @@ class NewCalendarPage extends GetView<NewCalendarController> {
             padding: const EdgeInsets.all(6.0),
             child: Column(
               children: [
-                Obx(() => (controller.studentSelected.value == null)
-                    ? GestureDetector(
-                        onTap: () {
-                          controller.goToMemberPicker();
-                        },
-                        child: Container(
-                          width: Get.width,
-                          height: 59,
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              border: Border.all(
-                                  color: AppColors.textColor, width: 1)),
-                          child: TextWidget(
-                            text: 'Chọn học viên',
+                GestureDetector(
+                  onTap: () {
+                    controller.goToMemberPicker();
+                  },
+                  child: Container(
+                    width: Get.width,
+                    height: 59,
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        border:
+                            Border.all(color: AppColors.textColor, width: 1)),
+                    child: const TextWidget(
+                      text: 'Thêm học viên',
+                    ),
+                  ),
+                ),
+                Obx(() => (controller.studentSelected.isNotEmpty)
+                    ? SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          itemCount: controller.studentSelected.length,
+                          itemBuilder: (context, index) => CustomContainer(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 80,
+                                        width: 80,
+                                        child: Image.asset(controller
+                                                .studentSelected[index]
+                                                .usersStudent!
+                                                .sex!
+                                            ? AppImage.userMaleImage
+                                            : AppImage.userFemaleImage),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          TextWidget(
+                                            text: controller.studentSelected[index]
+                                                    .usersStudent!.name ??
+                                                '',
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          TextWidget(
+                                              text: controller.studentSelected[index]
+                                                      .usersStudent!.phone ??
+                                                  '')
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                IconButton(onPressed: () {
+                                  controller.studentSelected.remove(controller.studentSelected[index]);
+                                }, icon: const Icon(Icons.remove_circle))
+                              ],
+                            ),
                           ),
                         ),
                       )
-                    : CustomContainer(
-                        onTap: () {
-                          controller.goToMemberPicker();
-                        },
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: Image.asset(
-                                  controller.studentSelected.value!.sex!
-                                      ? AppImage.userMaleImage
-                                      : AppImage.userFemaleImage),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextWidget(
-                                  text:
-                                      controller.studentSelected.value!.name ??
-                                          '',
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColor,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                TextWidget(
-                                    text: controller
-                                            .studentSelected.value!.phone ??
-                                        '')
-                              ],
-                            )
-                          ],
-                        ),
-                      )),
+                    : Container()),
                 const SizedBox(
                   height: 20,
                 ),
@@ -179,48 +195,50 @@ class NewCalendarPage extends GetView<NewCalendarController> {
                 const SizedBox(
                   height: 20,
                 ),
-                // Obx(() => ListView.separated(
-                //     shrinkWrap: true,
-                //     physics: const NeverScrollableScrollPhysics(),
-                //     itemBuilder: (context, index) {
-                //       ExerciseModel model = controller.listExercise[index];
-                //       return Card(
-                //         margin: EdgeInsets.zero,
-                //         color: AppColors.backgroundColor,
-                //         child: Padding(
-                //           padding: const EdgeInsets.all(6.0),
-                //           child: Row(
-                //             children: [
-                //               const SizedBox(
-                //                 width: 20,
-                //                 height: 30,
-                //               ),
-                //               Expanded(
-                //                 child: TextWidget(
-                //                   text: model.name ?? '',
-                //                   fontWeight: FontWeight.bold,
-                //                 ),
-                //               ),
-                //               IconButton(
-                //                   onPressed: () {
-                //                     controller.listExercise.remove(model);
-                //                   },
-                //                   icon: const Icon(
-                //                     Icons.remove_circle_outline,
-                //                     color: Colors.red,
-                //                     size: 30,
-                //                   ))
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //     separatorBuilder: (context, index) {
-                //       return const SizedBox(
-                //         height: 10,
-                //       );
-                //     },
-                //     itemCount: controller.listExercise.length))
+                Obx(() => ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      ExerciseModel model =
+                          controller.listExerciseSelected[index];
+                      return Card(
+                        margin: EdgeInsets.zero,
+                        color: AppColors.backgroundColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 20,
+                                height: 30,
+                              ),
+                              Expanded(
+                                child: TextWidget(
+                                  text: model.exerciseName ?? '',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    controller.listExerciseSelected
+                                        .remove(model);
+                                  },
+                                  icon: const Icon(
+                                    Icons.remove_circle_outline,
+                                    color: Colors.red,
+                                    size: 30,
+                                  ))
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 10,
+                      );
+                    },
+                    itemCount: controller.listExerciseSelected.length))
               ],
             ),
           ),
@@ -232,7 +250,9 @@ class NewCalendarPage extends GetView<NewCalendarController> {
               const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
           child: ButtonWidget(
             text: 'Thêm lịch',
-            onPressed: () async {},
+            onPressed: () async {
+              await controller.newCalendar();
+            },
           ),
         ),
       ),

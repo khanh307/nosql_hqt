@@ -20,8 +20,7 @@ class TrainerModel extends UserModel {
 
   TrainerModel.fromJsonUseDateTime(dynamic json) {
     id = json['ID'];
-
-    // usersTraner = UserModel.fromJsonUseDateTime(json['Users_Traner']);
+    usersTraner = UserModel.fromJsonUseDateTime(json['Users_Traner']);
     level = json['level'] != null ? json['level'].cast<String>() : [];
     salary = json['salary'];
   }

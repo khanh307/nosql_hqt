@@ -1,5 +1,6 @@
 import 'package:fitness_tracker/pages/body_part/body_part_controller.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_controller.dart';
+import 'package:fitness_tracker/pages/calendar/calendar_detail/calendar_detail_controller.dart';
 import 'package:get/get.dart';
 
 import '../pages/auth/login/login_controller.dart';
@@ -24,8 +25,7 @@ class AllBindings extends Bindings {
     Get.lazyPut(() => ExerciseDetailController());
     Get.lazyPut(() => NewCalendarController());
     Get.lazyPut(() => MemberController());
+    Get.lazyPut(() => CalendarDetailController());
 
-    // Get.lazyPut(() => NewMemberController());
-    // Get.lazyPut(() => CalendarDetailController());
   }
 }

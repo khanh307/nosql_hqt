@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:fitness_tracker/bindings/all_bindings.dart';
 import 'package:fitness_tracker/core/singleton.dart';
 import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
@@ -22,6 +23,12 @@ class BottomNavController extends GetxController {
   late List<Widget> pages = [
     const CalendarPage(),
     const MemberPage(),
+    const BodyPartPage(),
+    const SettingPage(),
+  ];
+
+  late List<Widget> pagesStudent = [
+    const CalendarPage(),
     const BodyPartPage(),
     const SettingPage(),
   ];
@@ -55,9 +62,32 @@ class BottomNavController extends GetxController {
         textAlign: TextAlign.center),
   ].obs;
 
+  RxList<BottomNavyBarItem> itemsStudent = [
+    BottomNavyBarItem(
+        icon: const Icon(Icons.calendar_month),
+        inactiveColor: AppColors.textGrey,
+        title: const Text('Lịch'),
+        activeColor: AppColors.primaryColor,
+        textAlign: TextAlign.center),
+    BottomNavyBarItem(
+      icon: const Icon(Icons.play_lesson_outlined),
+      inactiveColor: AppColors.textGrey,
+      title: const Text('Bài tập'),
+      textAlign: TextAlign.center,
+      activeColor: AppColors.primaryColor,
+    ),
+    BottomNavyBarItem(
+        icon: const Icon(Icons.settings),
+        inactiveColor: AppColors.textGrey,
+        title: const Text('Cài đặt'),
+        activeColor: AppColors.primaryColor,
+        textAlign: TextAlign.center),
+  ].obs;
+
   @override
   void onInit() async {
     super.onInit();
+    AllBindings().dependencies();
     if (user is TrainerModel) {
       print('Đăng nhập trainer');
     } else if (user is StudentModel) {

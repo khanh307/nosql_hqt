@@ -22,18 +22,18 @@ class SettingPage extends GetView<SettingController> {
             const SizedBox(
               height: 20,
             ),
-            CustomContainer(
-              child: Row(
-                children: [
-                  Image.asset('assets/images/account.png', width: 50),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const TextWidget(text: 'Thông tin cá nhân')
-                ],
-              ),
-              onTap: () {},
-            ),
+            // CustomContainer(
+            //   child: Row(
+            //     children: [
+            //       Image.asset('assets/images/account.png', width: 50),
+            //       const SizedBox(
+            //         width: 10,
+            //       ),
+            //       const TextWidget(text: 'Thông tin cá nhân')
+            //     ],
+            //   ),
+            //   onTap: () {},
+            // ),
             const SizedBox(
               height: 10,
             ),

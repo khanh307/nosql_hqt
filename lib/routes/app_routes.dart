@@ -1,4 +1,5 @@
 import 'package:fitness_tracker/pages/body_part/body_part_page.dart';
+import 'package:fitness_tracker/pages/calendar/calendar_detail/calendar_detail_page.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_page.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/exercise_picker/exercise_picker_page.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/member_picker/member_picker_page.dart';
@@ -85,12 +86,12 @@ class AppRoutes {
       binding: AllBindings(),
       transition: Transition.rightToLeft,
     ),
-    // GetPage(
-    //   name: NewMemberPage.routeName,
-    //   page: () => const NewMemberPage(),
-    //   binding: AllBindings(),
-    //   transition: Transition.rightToLeft,
-    // ),
+    GetPage(
+      name: CalendarDetailPage.routeName,
+      page: () => const CalendarDetailPage(),
+      binding: AllBindings(),
+      transition: Transition.rightToLeft,
+    ),
     // GetPage(
     //   name: CalendarDetailPage.routeName,
     //   page: () => const CalendarDetailPage(),

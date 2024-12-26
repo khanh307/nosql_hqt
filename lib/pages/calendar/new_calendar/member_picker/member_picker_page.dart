@@ -1,3 +1,4 @@
+import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/new_calendar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,50 +22,70 @@ class MemberPickerPage extends GetView<NewCalendarController> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(6.0),
-        child: Obx(() => ListView.separated(
-            itemBuilder: (context, index) {
-              UserModel model = controller.listStudent[index];
-              return CustomContainer(
-                onTap: () {
-                  controller.studentSelected.value = model;
-                  Get.back();
-                },
-                child: Row(
-                  children: [
-                    SizedBox(
-                      height: 80,
-                      width: 80,
-                      child: Image.asset(model.sex!
-                          ? AppImage.userMaleImage
-                          : AppImage.userFemaleImage),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        child: Obx(() => (controller.listStudent.isNotEmpty)
+            ? ListView.separated(
+                itemBuilder: (context, index) {
+                  StudentModel model = controller.listStudent[index];
+                  return CustomContainer(
+                    onTap: () {
+                      controller.pickerStudent(model);
+                    },
+                    child: Row(
                       children: [
-                        TextWidget(
-                          text: model.name ?? '',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor,
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: Image.asset(model.usersStudent!.sex!
+                                    ? AppImage.userMaleImage
+                                    : AppImage.userFemaleImage),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextWidget(
+                                    text: model.usersStudent!.name ?? '',
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextWidget(
+                                      text: model.usersStudent!.phone ?? '')
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        TextWidget(text: model.phone ?? '')
+                        Obx(() => (controller.studentSelected.contains(model))
+                            ? IconButton(
+                                onPressed: () {
+                                  controller.pickerStudent(model);
+                                },
+                                icon: const Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                ))
+                            : Container())
                       ],
-                    )
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 8,
-              );
-            },
-            itemCount: controller.listStudent.length)),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 8,
+                  );
+                },
+                itemCount: controller.listStudent.length)
+            : const Center(
+                child: TextWidget(
+                    text: 'Không có học viên trống lịch trong khung giờ này'))),
       ),
     );
   }

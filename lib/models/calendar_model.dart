@@ -1,21 +1,21 @@
+import 'package:fitness_tracker/models/exercise_model.dart';
 import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
 import 'package:fitness_tracker/models/user_model.dart';
 
 class CalendarModel {
-  CalendarModel({
-    this.id,
-    this.endTime,
-    this.startTime,
-    this.calendarTraner,
-    this.calenderStudent,
-  });
+  CalendarModel(
+      {this.id,
+      this.endTime,
+      this.startTime,
+      this.calendarTraner,
+      this.calenderStudent,
+      this.calendarExercise});
 
   CalendarModel.fromJson(dynamic json) {
     id = json['ID'];
-    endTime = json['End_time'];
-    startTime =
-        json['Start_time'] != null ? json['Start_time'].cast<String>() : [];
+    endTime = json['End_time'].toDate();
+    startTime = json['Start_time'].toDate();
     if (json['Calendar_Traner'] != null) {
       calendarTraner = [];
       json['Calendar_Traner'].forEach((v) {
@@ -28,18 +28,25 @@ class CalendarModel {
         calenderStudent?.add(UserModel.fromJson(v));
       });
     }
+    if (json['Calendar_Exercise'] != null) {
+      calendarExercise = [];
+      json['Calendar_Exercise'].forEach((v) {
+        calendarExercise?.add(ExerciseModel.fromJson(v));
+      });
+    }
   }
 
   String? id;
-  String? endTime;
-  List<String>? startTime;
+  DateTime? endTime;
+  DateTime? startTime;
   List<UserModel>? calendarTraner;
   List<UserModel>? calenderStudent;
+  List<ExerciseModel>? calendarExercise;
 
   CalendarModel copyWith({
     String? id,
-    String? endTime,
-    List<String>? startTime,
+    DateTime? endTime,
+    DateTime? startTime,
     List<UserModel>? calendarTraner,
     List<UserModel>? calenderStudent,
   }) =>
@@ -63,6 +70,18 @@ class CalendarModel {
       map['Calender_Student'] =
           calenderStudent?.map((v) => v.toJson()).toList();
     }
+    if (calendarExercise != null) {
+      map['Calendar_Exercise'] =
+          calendarExercise?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+  Map<String, dynamic> toJsonForStudent() {
+    final map = <String, dynamic>{};
+    map['ID'] = id;
+    map['End_time'] = endTime;
+    map['Start_time'] = startTime;
     return map;
   }
 }

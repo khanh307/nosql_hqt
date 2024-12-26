@@ -48,6 +48,12 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
 
     final TimeOfDay? picked = await showTimePicker(
       context: context,
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child ?? const SizedBox(),
+        );
+      },
       initialTime: widget.value ?? TimeOfDay.now(),
     );
     if (picked != null && picked != selectedDate) {

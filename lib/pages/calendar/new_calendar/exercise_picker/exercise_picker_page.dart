@@ -1,4 +1,4 @@
-
+import 'package:fitness_tracker/models/body_part_model.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/new_calendar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +10,7 @@ import '../../../exercise/exercise_detail/exercise_detail_page.dart';
 
 class ExercisePickerPage extends GetView<NewCalendarController> {
   static const String routeName = '/exercisePicker';
+
   const ExercisePickerPage({super.key});
 
   @override
@@ -22,20 +23,33 @@ class ExercisePickerPage extends GetView<NewCalendarController> {
           padding: const EdgeInsets.all(6.0),
           child: Column(
             children: [
-              DropdownButton(items: [
-
-              ], onChanged: (value) {
-
-              }),
-
+              Obx(() => DropdownButton<BodyPartModel>(
+                    items: controller.listBodyPart
+                        .map(
+                          (e) => DropdownMenuItem(
+                              value: e,
+                              child: ListTile(
+                                title: TextWidget(text: e.departmentName ?? ''),
+                              )),
+                        )
+                        .toList(),
+                    onChanged: (value) async {
+                      controller.bodyPartSelected.value = value!;
+                      await controller.getExcercise();
+                    },
+                    isExpanded: true,
+                    hint: const TextWidget(text: 'Chọn bộ phận'),
+                    value: controller.bodyPartSelected.value,
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: Obx(() => ListView.separated(
                     itemBuilder: (context, index) {
                       ExerciseModel model = controller.listExercise[index];
                       return GestureDetector(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Card(
                           margin: EdgeInsets.zero,
                           color: AppColors.backgroundColor,
@@ -48,7 +62,7 @@ class ExercisePickerPage extends GetView<NewCalendarController> {
                                     children: [
                                       const SizedBox(
                                         width: 20,
-                                        height: 30,
+                                        height: 50,
                                       ),
                                       Expanded(
                                         child: TextWidget(
@@ -59,6 +73,14 @@ class ExercisePickerPage extends GetView<NewCalendarController> {
                                     ],
                                   ),
                                 ),
+                                Obx(() =>IconButton(
+                                    onPressed: () {
+                                      controller.pickerExercise(model);
+                                    },
+                                    icon: (controller.listExerciseSelected
+                                            .contains(model))
+                                        ? const Icon(Icons.check_circle, color: Colors.green,)
+                                        : const Icon(Icons.add_circle)))
                               ],
                             ),
                           ),

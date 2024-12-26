@@ -10,4 +10,6 @@ class Constants {
   static const String exerciseCollection = 'Exercise';
   static const String startTime = 'Start_time';
   static const String endTime = 'End_time';
+  static const String calendarTraner = 'Calendar_Traner';
+  static const String calendarStudent = 'Calender_Student';
 }

@@ -1,6 +1,9 @@
 import 'package:fitness_tracker/bindings/all_bindings.dart';
+import 'package:fitness_tracker/core/singleton.dart';
 import 'package:fitness_tracker/models/body_part_model.dart';
 import 'package:fitness_tracker/models/calendar_model.dart';
+import 'package:fitness_tracker/models/traniner_model.dart';
+import 'package:fitness_tracker/pages/calendar/calendar_controller.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/exercise_picker/exercise_picker_page.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/member_picker/member_picker_page.dart';
 import 'package:fitness_tracker/services/body_part_service.dart';
@@ -24,8 +27,8 @@ class NewCalendarController extends GetxController {
   Rx<TimeOfDay> fromTime = Rx(TimeOfDay.now());
   Rx<TimeOfDay> toTime = Rx(TimeOfDay.now());
   RxList<ExerciseModel> listExerciseSelected = <ExerciseModel>[].obs;
-  Rx<UserModel?> studentSelected = Rx(null);
-  RxList<UserModel> listStudent = <UserModel>[].obs;
+  RxList<StudentModel> studentSelected = <StudentModel>[].obs;
+  RxList<StudentModel> listStudent = <StudentModel>[].obs;
   final CalendarService _calendarService = CalendarService();
   final UserService _userService = UserService();
   final BodyPartService _bodyPartService = BodyPartService();
@@ -33,6 +36,7 @@ class NewCalendarController extends GetxController {
   List<BodyPartModel> listBodyPart = [];
   Rx<BodyPartModel> bodyPartSelected = Rx(BodyPartModel());
   RxList<ExerciseModel> listExercise = <ExerciseModel>[].obs;
+  UserModel user = Singleton().user!;
 
   @override
   void onInit() {
@@ -124,10 +128,7 @@ class NewCalendarController extends GetxController {
       print('student empty');
       await _userService.getAllStudent().then(
         (value) {
-          for (var student in value) {
-            print('student empty }');
-            listStudent.add(student.usersStudent!);
-          }
+          listStudent.addAll(value);
           DialogUtil.hideLoading();
         },
       );
@@ -144,59 +145,102 @@ class NewCalendarController extends GetxController {
     }
   }
 
-// Future newCalendar() async {
-//   await DialogUtil.showLoading(isClosed: false);
-//   if (userSelected.value == null) {
-//     DialogUtil.hideLoading();
-//     DialogUtil.showDialogWarning(text: 'Vui lòng chọn học viên!');
-//     return;
-//   }
-//   if (listExercise.isEmpty) {
-//     DialogUtil.hideLoading();
-//     DialogUtil.showDialogWarning(text: 'Vui lòng chọn bài tập');
-//     return;
-//   }
-//   List<double> items = [10, 10, 10];
-//   Map<String, List<double>> listExerciseId = {};
-//   for (var item in listExercise) {
-//     listExerciseId.addAll({item.id!: items});
-//   }
-//   fromDate.value = fromDate.value.copyWith(
-//       year: fromDate.value.year,
-//       month: fromDate.value.month,
-//       day: fromDate.value.day,
-//       hour: fromTime.value.hour,
-//       minute: fromTime.value.minute,
-//       second: 0,
-//       microsecond: 0,
-//       millisecond: 0);
-//   toDate.value = toDate.value.copyWith(
-//       year: toDate.value.year,
-//       month: toDate.value.month,
-//       day: toDate.value.day,
-//       hour: toTime.value.hour,
-//       minute: toTime.value.minute,
-//       second: 0,
-//       microsecond: 0,
-//       millisecond: 0);
-//   CalendarModel calendar = CalendarModel();
-//
-//   try {
-//     CalendarModel? result =
-//         await _calendarService.newCalendar(calendar: calendar);
-//     if (result == null) {
-//       DialogUtil.hideLoading();
-//       DialogUtil.showDialogError(text: 'Lỗi tạo mới lịch');
-//     } else {
-//       DialogUtil.hideLoading();
-//       DialogUtil.showDialogSuccess(
-//         text: 'Tạo mới thành công',
-//         actionClose: () {},
-//       );
-//     }
-//   } catch (e) {
-//     DialogUtil.hideLoading();
-//     DialogUtil.showDialogError(text: e.toString());
-//   }
-// }
+  void pickerExercise(ExerciseModel exercise) {
+    if (listExerciseSelected.contains(exercise)) {
+      listExerciseSelected.remove(exercise);
+    } else {
+      listExerciseSelected.add(exercise);
+    }
+  }
+
+  void pickerStudent(StudentModel student) {
+    if (studentSelected.contains(student)) {
+      studentSelected.remove(student);
+    } else {
+      studentSelected.add(student);
+    }
+    studentSelected.refresh();
+  }
+
+  Future newCalendar() async {
+    await DialogUtil.showLoading(isClosed: false);
+    if (studentSelected.isEmpty) {
+      DialogUtil.hideLoading();
+      DialogUtil.showDialogWarning(text: 'Vui lòng chọn học viên!');
+      return;
+    }
+    if (listExercise.isEmpty) {
+      DialogUtil.hideLoading();
+      DialogUtil.showDialogWarning(text: 'Vui lòng chọn bài tập');
+      return;
+    }
+
+    fromDate.value = fromDate.value.copyWith(
+        year: fromDate.value.year,
+        month: fromDate.value.month,
+        day: fromDate.value.day,
+        hour: fromTime.value.hour,
+        minute: fromTime.value.minute,
+        second: 0,
+        microsecond: 0,
+        millisecond: 0);
+    toDate.value = toDate.value.copyWith(
+        year: toDate.value.year,
+        month: toDate.value.month,
+        day: toDate.value.day,
+        hour: toTime.value.hour,
+        minute: toTime.value.minute,
+        second: 0,
+        microsecond: 0,
+        millisecond: 0);
+    List<UserModel> userSelected = [];
+    for (var element in studentSelected) {
+      userSelected.add(element.usersStudent!);
+    }
+    CalendarModel calendar = CalendarModel(
+        endTime: toDate.value,
+        startTime: fromDate.value,
+        calendarExercise: listExerciseSelected,
+        calendarTraner: [(user as TrainerModel).usersTraner!],
+        calenderStudent: userSelected);
+    try {
+      CalendarModel? result =
+          await _calendarService.createCalendar(calendar: calendar);
+      if (result == null) {
+        DialogUtil.hideLoading();
+        DialogUtil.showDialogError(text: 'Lỗi tạo mới lịch');
+      } else {
+        DialogUtil.hideLoading();
+        for (var element in studentSelected) {
+          element.studentCalendar!.add(result);
+        }
+        await _updateCalendarForStudent(studentSelected);
+
+        DialogUtil.showDialogSuccess(
+          text: 'Tạo mới thành công',
+          actionClose: () {
+            studentSelected.clear();
+            listExerciseSelected.clear();
+            CalendarController.instance.getCalendar();
+          },
+        );
+      }
+    } catch (e) {
+      DialogUtil.hideLoading();
+      DialogUtil.showDialogError(text: e.toString());
+    }
+  }
+
+  Future _updateCalendarForStudent(List<StudentModel> students) async {
+    DialogUtil.showLoading();
+    try {
+      for (var student in students) {
+        await _userService.updateCalendarStudent(studentModel: student);
+      }
+      DialogUtil.hideLoading();
+    } catch (e) {
+      DialogUtil.hideLoading();
+      DialogUtil.showDialogError(text: e.toString());
+    }
+  }
 }

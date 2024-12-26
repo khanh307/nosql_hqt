@@ -65,7 +65,7 @@ class StudentModel extends UserModel{
     }
     if (studentCalendar != null) {
       map['Student_Calendar'] =
-          studentCalendar?.map((v) => v.toJson()).toList();
+          studentCalendar?.map((v) => v.toJsonForStudent()).toList();
     }
     map['Users_Student'] = usersStudent!.toJson();
     return map;
@@ -75,15 +75,25 @@ class StudentModel extends UserModel{
     final map = <String, dynamic>{};
     map['ID'] = id;
     map['Card_class'] = cardClass;
-    if (studentBodyIndices != null) {
-      map['Student_Body_Indices'] =
-          studentBodyIndices?.map((v) => v.toJson()).toList();
-    }
-    if (studentCalendar != null) {
-      map['Student_Calendar'] =
-          studentCalendar?.map((v) => v.toJson()).toList();
-    }
+    // if (studentBodyIndices != null) {
+    //   map['Student_Body_Indices'] =
+    //       studentBodyIndices?.map((v) => v.toJson()).toList();
+    // }
+    // if (studentCalendar != null) {
+    //   map['Student_Calendar'] =
+    //       studentCalendar?.map((v) => v.toJson()).toList();
+    // }
     map['Users_Student'] = usersStudent!.toJsonUserDateTime();
     return map;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StudentModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
