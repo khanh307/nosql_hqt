@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 class MemberController extends GetxController {
   static MemberController get instants => Get.find();
-  bool isSelected = BottomNavController.instants.isSelected;
   RxList<StudentModel> listMember = <StudentModel>[].obs;
   final UserService _userServices = UserService();
 

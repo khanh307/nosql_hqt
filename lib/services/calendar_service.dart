@@ -3,6 +3,8 @@ import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/services/base_service.dart';
 import 'package:fitness_tracker/services/constants.dart';
 
+import '../models/user_model.dart';
+
 class CalendarService extends BaseService {
   static final CalendarService _instance = CalendarService._internal();
 
@@ -12,9 +14,9 @@ class CalendarService extends BaseService {
 
   CalendarService._internal();
 
-  Future<Set<StudentModel>> getStudentInCalendar(
+  Future<Set<UserModel>> getStudentInCalendar(
       {required DateTime startTime, required DateTime endTime}) async {
-    Set<StudentModel> result = {};
+    Set<UserModel> result = {};
     await firestore
         .collection(Constants.calendarCollection)
         .where(Constants.startTime, isLessThanOrEqualTo: startTime)

@@ -1,5 +1,6 @@
 import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
+import 'package:fitness_tracker/models/user_model.dart';
 
 class CalendarModel {
   CalendarModel({
@@ -18,13 +19,13 @@ class CalendarModel {
     if (json['Calendar_Traner'] != null) {
       calendarTraner = [];
       json['Calendar_Traner'].forEach((v) {
-        calendarTraner?.add(TrainerModel.fromJson(v));
+        calendarTraner?.add(UserModel.fromJson(v));
       });
     }
     if (json['Calender_Student'] != null) {
       calenderStudent = [];
       json['Calender_Student'].forEach((v) {
-        calenderStudent?.add(StudentModel.fromJson(v));
+        calenderStudent?.add(UserModel.fromJson(v));
       });
     }
   }
@@ -32,15 +33,15 @@ class CalendarModel {
   String? id;
   String? endTime;
   List<String>? startTime;
-  List<TrainerModel>? calendarTraner;
-  List<StudentModel>? calenderStudent;
+  List<UserModel>? calendarTraner;
+  List<UserModel>? calenderStudent;
 
   CalendarModel copyWith({
     String? id,
     String? endTime,
     List<String>? startTime,
-    List<TrainerModel>? calendarTraner,
-    List<StudentModel>? calenderStudent,
+    List<UserModel>? calendarTraner,
+    List<UserModel>? calenderStudent,
   }) =>
       CalendarModel(
         id: id ?? this.id,

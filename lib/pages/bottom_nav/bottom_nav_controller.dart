@@ -17,7 +17,6 @@ class BottomNavController extends GetxController {
   static BottomNavController get instants => Get.find();
   RxInt selectedIndex = 0.obs;
   late PageController pageController = PageController();
-  bool isSelected = false;
   UserModel user = Singleton().user!;
 
   late List<Widget> pages = [

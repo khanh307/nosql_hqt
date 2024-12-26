@@ -11,7 +11,7 @@ class ExerciseDetailController extends GetxController {
   late VideoPlayerController videoController2;
   Rx<ChewieController?> chewieController = Rx(null);
   Rx<ChewieController?> chewieController2 = Rx(null);
-  RxBool isSelected = BottomNavController.instants.isSelected.obs;
+
 
   @override
   void onReady() async {

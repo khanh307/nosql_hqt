@@ -24,6 +24,7 @@ class AllBindings extends Bindings {
     Get.lazyPut(() => ExerciseDetailController());
     Get.lazyPut(() => NewCalendarController());
     Get.lazyPut(() => MemberController());
+
     // Get.lazyPut(() => NewMemberController());
     // Get.lazyPut(() => CalendarDetailController());
   }

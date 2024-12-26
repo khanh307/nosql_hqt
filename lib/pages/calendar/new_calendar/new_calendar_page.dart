@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 
 import '../../../models/exercise_model.dart';
 import '../../../utils/const/app_colors.dart';
+import '../../../utils/const/app_images.dart';
+import '../../../widgets/custom_container.dart';
 
 class NewCalendarPage extends GetView<NewCalendarController> {
   static const String routeName = '/newCalendar';
@@ -31,27 +33,64 @@ class NewCalendarPage extends GetView<NewCalendarController> {
             padding: const EdgeInsets.all(6.0),
             child: Column(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    controller.goToMemberPicker();
-                  },
-                  child: Obx(() => Container(
-                        width: Get.width,
-                        height: 59,
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(
-                                color: AppColors.textColor, width: 1)),
-                        child: TextWidget(
-                          text: controller.studentSelected.value == null
-                              ? 'Chọn học viên'
-                              : '${controller.studentSelected.value!.usersStudent!.name}'
-                                  ' - ${controller.studentSelected.value!.usersStudent!.phone}',
+                Obx(() => (controller.studentSelected.value == null)
+                    ? GestureDetector(
+                        onTap: () {
+                          controller.goToMemberPicker();
+                        },
+                        child: Container(
+                          width: Get.width,
+                          height: 59,
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              border: Border.all(
+                                  color: AppColors.textColor, width: 1)),
+                          child: TextWidget(
+                            text: 'Chọn học viên',
+                          ),
+                        ),
+                      )
+                    : CustomContainer(
+                        onTap: () {
+                          controller.goToMemberPicker();
+                        },
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: Image.asset(
+                                  controller.studentSelected.value!.sex!
+                                      ? AppImage.userMaleImage
+                                      : AppImage.userFemaleImage),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextWidget(
+                                  text:
+                                      controller.studentSelected.value!.name ??
+                                          '',
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primaryColor,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextWidget(
+                                    text: controller
+                                            .studentSelected.value!.phone ??
+                                        '')
+                              ],
+                            )
+                          ],
                         ),
                       )),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -120,7 +159,9 @@ class NewCalendarPage extends GetView<NewCalendarController> {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    controller.goToExercisePicker();
+                  },
                   child: Container(
                     width: Get.width,
                     height: 59,

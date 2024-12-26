@@ -17,21 +17,24 @@ class MemberPickerPage extends GetView<NewCalendarController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hội viên'),
+        title: const Text('Chọn hội viên'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(6.0),
         child: Obx(() => ListView.separated(
             itemBuilder: (context, index) {
-              UserModel model = controller.listStudent[index].usersStudent!;
+              UserModel model = controller.listStudent[index];
               return CustomContainer(
-                onTap: () {},
+                onTap: () {
+                  controller.studentSelected.value = model;
+                  Get.back();
+                },
                 child: Row(
                   children: [
                     SizedBox(
                       height: 80,
                       width: 80,
-                      child: Image.asset(model.sex ?? false
+                      child: Image.asset(model.sex!
                           ? AppImage.userMaleImage
                           : AppImage.userFemaleImage),
                     ),

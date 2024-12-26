@@ -34,7 +34,7 @@ class MemberPage extends GetView<MemberController> {
                     SizedBox(
                       height: 80,
                       width: 80,
-                      child: Image.asset(model.sex == 'Nam'
+                      child: Image.asset(model.sex ?? false
                           ? AppImage.userMaleImage
                           : AppImage.userFemaleImage),
                     ),

@@ -170,18 +170,18 @@ class UserService extends BaseService {
     return result;
   }
 
-  Future<List<StudentModel>> getStudentByIdNotIn(
+  Future<List<UserModel>> getStudentByIdNotIn(
       {required List<String> listId}) async {
-    List<StudentModel> result = [];
+    List<UserModel> result = [];
     await firestore
-        .collection(Constants.studentCollection)
+        .collection(Constants.userCollection)
         .where('ID', whereNotIn: listId)
         .get()
         .then(
       (value) {
         if (value.docs.isNotEmpty) {
           for (var doc in value.docs) {
-            result.add(StudentModel.fromJson(doc.data()));
+            result.add(UserModel.fromJson(doc.data()));
           }
         }
       },

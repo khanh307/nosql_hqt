@@ -7,6 +7,7 @@ class Constants {
   static const String trainerCollection = 'Traner';
   static const String bodyPartCollection = 'Body_Part';
   static const String calendarCollection = 'Calendar';
+  static const String exerciseCollection = 'Exercise';
   static const String startTime = 'Start_time';
   static const String endTime = 'End_time';
 }
