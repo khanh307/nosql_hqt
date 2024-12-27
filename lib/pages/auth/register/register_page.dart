@@ -56,7 +56,7 @@ class RegisterPage extends GetView<RegisterController> {
                   InputWidget(
                     hintText: 'Họ tên',
                     controller: controller.fullnameController,
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.text,
                     inputFormater: [NameFormat()],
                     validator: (value) {
                       return ValidationEditText.validationRequired(value);
