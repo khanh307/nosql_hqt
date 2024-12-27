@@ -222,6 +222,7 @@ class NewCalendarController extends GetxController {
             studentSelected.clear();
             listExerciseSelected.clear();
             CalendarController.instance.getCalendar();
+            Get.back();
           },
         );
       }
@@ -235,7 +236,7 @@ class NewCalendarController extends GetxController {
     DialogUtil.showLoading();
     try {
       for (var student in students) {
-        await _userService.updateCalendarStudent(studentModel: student);
+        await _userService.updateStudent(studentModel: student);
       }
       DialogUtil.hideLoading();
     } catch (e) {

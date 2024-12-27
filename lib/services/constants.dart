@@ -8,6 +8,7 @@ class Constants {
   static const String bodyPartCollection = 'Body_Part';
   static const String calendarCollection = 'Calendar';
   static const String exerciseCollection = 'Exercise';
+  static const String bodyIndicesCollection = 'Body_Indices';
   static const String startTime = 'Start_time';
   static const String endTime = 'End_time';
   static const String calendarTraner = 'Calendar_Traner';

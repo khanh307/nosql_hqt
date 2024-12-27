@@ -77,6 +77,23 @@ class CalendarService extends BaseService {
     return result;
   }
 
+  Future<bool?> deleteCalendar(
+      {required CalendarModel calendar}) async {
+    bool result = false;
+    await firestore
+        .collection(Constants.calendarCollection)
+        .doc(calendar.id)
+        .delete()
+        .then(
+          (value) async {
+        result = true;
+      },
+    ).onError((error, stackTrace) {
+      throw BadRequestException(error.toString());
+    });
+    return result;
+  }
+
   Future<List<CalendarModel>> getCalendarForTrainer(
       {required DateTime date, required UserModel trainer}) async {
     DateTime startOfDay = date.copyWith(

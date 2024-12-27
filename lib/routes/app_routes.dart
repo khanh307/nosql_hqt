@@ -1,3 +1,5 @@
+import 'package:fitness_tracker/pages/body_indices/body_indices_page.dart';
+import 'package:fitness_tracker/pages/body_indices/new_indices/new_indices_page.dart';
 import 'package:fitness_tracker/pages/body_part/body_part_page.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_detail/calendar_detail_page.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_page.dart';
@@ -92,11 +94,17 @@ class AppRoutes {
       binding: AllBindings(),
       transition: Transition.rightToLeft,
     ),
-    // GetPage(
-    //   name: CalendarDetailPage.routeName,
-    //   page: () => const CalendarDetailPage(),
-    //   binding: AllBindings(),
-    //   transition: Transition.rightToLeft,
-    // )
+    GetPage(
+      name: BodyIndicesPage.routeName,
+      page: () => const BodyIndicesPage(),
+      binding: AllBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: NewIndicesPage.routeName,
+      page: () => const NewIndicesPage(),
+      binding: AllBindings(),
+      transition: Transition.rightToLeft,
+    ),
   ];
 }

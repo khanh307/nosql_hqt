@@ -4,6 +4,7 @@ import 'package:fitness_tracker/core/singleton.dart';
 import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
 import 'package:fitness_tracker/models/user_model.dart';
+import 'package:fitness_tracker/pages/body_indices/body_indices_page.dart';
 import 'package:fitness_tracker/pages/body_part/body_part_page.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_page.dart';
 import 'package:fitness_tracker/pages/member/member_page.dart';
@@ -29,6 +30,7 @@ class BottomNavController extends GetxController {
 
   late List<Widget> pagesStudent = [
     const CalendarPage(),
+    const BodyIndicesPage(),
     const BodyPartPage(),
     const SettingPage(),
   ];
@@ -67,6 +69,12 @@ class BottomNavController extends GetxController {
         icon: const Icon(Icons.calendar_month),
         inactiveColor: AppColors.textGrey,
         title: const Text('Lịch'),
+        activeColor: AppColors.primaryColor,
+        textAlign: TextAlign.center),
+    BottomNavyBarItem(
+        icon: const Icon(Icons.emoji_people_outlined),
+        inactiveColor: AppColors.textGrey,
+        title: const Text('Chỉ số'),
         activeColor: AppColors.primaryColor,
         textAlign: TextAlign.center),
     BottomNavyBarItem(

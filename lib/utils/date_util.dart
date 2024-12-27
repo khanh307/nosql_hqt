@@ -7,6 +7,7 @@ class DateUtil {
   static final DateFormat _format4 = DateFormat('HH:mm');
   static final DateFormat _format5 = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
   static final DateFormat _format6 = DateFormat('EEEE', 'vi');
+  static final DateFormat _format7 = DateFormat('dd/MM/yy');
 
   static String formatDate(DateTime date) {
     return _format.format(date);
@@ -14,6 +15,10 @@ class DateUtil {
 
   static String formatDateNotHH(DateTime date) {
     return _format2.format(date);
+  }
+
+  static String formatDate7(DateTime date) {
+    return _format7.format(date);
   }
 
   static String formatThu(DateTime date, [bool formatShort = true]) {

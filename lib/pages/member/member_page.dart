@@ -1,4 +1,5 @@
 import 'package:fitness_tracker/models/user_model.dart';
+import 'package:fitness_tracker/pages/body_indices/body_indices_page.dart';
 import 'package:fitness_tracker/pages/member/member_controller.dart';
 
 import 'package:fitness_tracker/utils/const/app_colors.dart';
@@ -27,7 +28,7 @@ class MemberPage extends GetView<MemberController> {
               UserModel model = controller.listMember[index].usersStudent!;
               return CustomContainer(
                 onTap: () {
-
+                  Get.toNamed(BodyIndicesPage.routeName, arguments: controller.listMember[index]);
                 },
                 child: Row(
                   children: [

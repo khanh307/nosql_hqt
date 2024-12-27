@@ -170,6 +170,26 @@ class UserService extends BaseService {
     return result;
   }
 
+  Future<List<StudentModel>> getAllStudentById(List<String> id) async {
+    List<StudentModel> result = [];
+    await firestore
+        .collection(Constants.studentCollection)
+        .where('ID', whereIn: id)
+        .get()
+        .then(
+      (value) {
+        if (value.docs.isNotEmpty) {
+          for (var doc in value.docs) {
+            result.add(StudentModel.fromJson(doc.data()));
+          }
+        }
+      },
+    ).onError((error, stackTrace) {
+      throw BadRequestException(error.toString());
+    });
+    return result;
+  }
+
   Future<List<StudentModel>> getStudentByIdNotIn(
       {required List<String> listId}) async {
     List<StudentModel> result = [];
@@ -191,8 +211,7 @@ class UserService extends BaseService {
     return result;
   }
 
-  Future<bool> updateCalendarStudent(
-      {required StudentModel studentModel}) async {
+  Future<bool> updateStudent({required StudentModel studentModel}) async {
     bool result = false;
     await firestore
         .collection(Constants.studentCollection)

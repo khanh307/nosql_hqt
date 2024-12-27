@@ -24,6 +24,11 @@ class CalendarDetailPage extends GetView<CalendarDetailController> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Thêm lịch'),
+          actions: [
+            IconButton(onPressed: () {
+              controller.showDialogConfirmDelete();
+            }, icon: const Icon(Icons.delete, color: Colors.white,))
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(

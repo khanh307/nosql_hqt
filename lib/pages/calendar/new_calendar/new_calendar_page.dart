@@ -51,64 +51,68 @@ class NewCalendarPage extends GetView<NewCalendarController> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 5,),
                 Obx(() => (controller.studentSelected.isNotEmpty)
                     ? SizedBox(
                         height: 200,
-                        child: ListView.builder(
-                          itemCount: controller.studentSelected.length,
-                          itemBuilder: (context, index) => CustomContainer(
-                            onTap: () {},
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        height: 80,
-                                        width: 80,
-                                        child: Image.asset(controller
-                                                .studentSelected[index]
-                                                .usersStudent!
-                                                .sex!
-                                            ? AppImage.userMaleImage
-                                            : AppImage.userFemaleImage),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          TextWidget(
-                                            text: controller.studentSelected[index]
-                                                    .usersStudent!.name ??
-                                                '',
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primaryColor,
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          TextWidget(
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          child: ListView.separated(
+                            itemCount: controller.studentSelected.length,
+                            itemBuilder: (context, index) => CustomContainer(
+                              onTap: () {},
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 80,
+                                          width: 80,
+                                          child: Image.asset(controller
+                                                  .studentSelected[index]
+                                                  .usersStudent!
+                                                  .sex!
+                                              ? AppImage.userMaleImage
+                                              : AppImage.userFemaleImage),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextWidget(
                                               text: controller.studentSelected[index]
-                                                      .usersStudent!.phone ??
-                                                  '')
-                                        ],
-                                      )
-                                    ],
+                                                      .usersStudent!.name ??
+                                                  '',
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primaryColor,
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            TextWidget(
+                                                text: controller.studentSelected[index]
+                                                        .usersStudent!.phone ??
+                                                    '')
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                IconButton(onPressed: () {
-                                  controller.studentSelected.remove(controller.studentSelected[index]);
-                                }, icon: const Icon(Icons.remove_circle))
-                              ],
-                            ),
+                                  IconButton(onPressed: () {
+                                    controller.studentSelected.remove(controller.studentSelected[index]);
+                                  }, icon: const Icon(Icons.remove_circle))
+                                ],
+                              ),
+                            ), separatorBuilder: (BuildContext context, int index) { return const SizedBox(height: 5,); },
                           ),
                         ),
                       )
                     : Container()),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Row(
                   children: [

@@ -18,7 +18,7 @@ class TimelineWidget extends StatefulWidget {
 }
 
 class _TimelineWidgetState extends State<TimelineWidget> {
-  final DateTime _now = DateTime.now();
+  DateTime _now = DateTime.now();
 
   late Timer _timer;
 
@@ -29,8 +29,10 @@ class _TimelineWidgetState extends State<TimelineWidget> {
   }
 
   void _startPeriodicRebuild() {
-    _timer = Timer.periodic(const Duration(minutes: 2), (timer) {
-      setState(() {});
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      setState(() {
+        _now = DateTime.now();
+      });
     });
   }
 
@@ -208,7 +210,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                             size: 16,
                           ),
                           TextWidget(
-                            text: DateUtil.formatTime(item.startTime),
+                            text: '${DateUtil.formatTime(item.startTime)} -> ${DateUtil.formatTime(item.endTime)}',
+                            size: 14,
                           ),
                         ],
                       ),
@@ -221,6 +224,12 @@ class _TimelineWidgetState extends State<TimelineWidget> {
         );
       },
     );
+  }
+
+   @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 }
 

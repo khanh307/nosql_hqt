@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../models/user_model.dart';
 import '../../../../utils/const/app_colors.dart';
 import '../../../../utils/const/app_images.dart';
+import '../../../../widgets/button_widget.dart';
 import '../../../../widgets/custom_container.dart';
 import '../../../../widgets/text_widget.dart';
 
@@ -86,6 +87,16 @@ class MemberPickerPage extends GetView<NewCalendarController> {
             : const Center(
                 child: TextWidget(
                     text: 'Không có học viên trống lịch trong khung giờ này'))),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(20),
+        child: ButtonWidget(
+          text: 'Tiếp tục',
+          onPressed: () {
+            Get.back();
+          },
+          isResponsive: true,
+        ),
       ),
     );
   }
