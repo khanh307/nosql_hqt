@@ -12,6 +12,7 @@ class ButtonWidget extends StatelessWidget {
   final Color backgroundColor;
   final bool isResponsive;
   final Widget? icon;
+  final ButtonIconAlign iconAlign;
 
   const ButtonWidget(
       {super.key,
@@ -22,7 +23,8 @@ class ButtonWidget extends StatelessWidget {
       this.textColor = Colors.white,
       this.backgroundColor = AppColors.primaryColor,
       this.isResponsive = false,
-      this.icon});
+      this.icon,
+      this.iconAlign = ButtonIconAlign.left});
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +37,29 @@ class ButtonWidget extends StatelessWidget {
         height: height,
         width: (isResponsive) ? Get.width : width,
         decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(4.0)),
+            color: backgroundColor, borderRadius: BorderRadius.circular(4.0)),
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              (icon != null) ? icon! : Container(),
-              (icon != null) ? const SizedBox(width: 6.0) : Container(),
+              (icon != null && iconAlign == ButtonIconAlign.left)
+                  ? icon!
+                  : Container(),
+              (icon != null && iconAlign == ButtonIconAlign.left)
+                  ? const SizedBox(width: 6.0)
+                  : Container(),
               TextWidget(
                 text: text,
                 color: Colors.white,
                 size: 18.0,
                 fontWeight: FontWeight.bold,
               ),
+              (icon != null && iconAlign == ButtonIconAlign.right)
+                  ? const SizedBox(width: 6.0)
+                  : Container(),
+              (icon != null && iconAlign == ButtonIconAlign.right)
+                  ? icon!
+                  : Container(),
             ],
           ),
         ),
@@ -56,3 +67,5 @@ class ButtonWidget extends StatelessWidget {
     );
   }
 }
+
+enum ButtonIconAlign { left, right }

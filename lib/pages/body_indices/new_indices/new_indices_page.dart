@@ -100,9 +100,9 @@ class NewIndicesPage extends GetView<NewIndicesController> {
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(20),
           child: ButtonWidget(
-            text: 'Lưu',
+            text: 'Tiếp tục',
             onPressed: () async {
-              await controller.newBodyIndices();
+
             },
           ),
         ),

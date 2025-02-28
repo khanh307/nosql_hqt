@@ -36,10 +36,10 @@ class CalendarDetailPage extends GetView<CalendarDetailController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextWidget(
-                  text: 'HLV: ${controller.calendar.calendarTraner!.first.name}',
+                (controller.calendar.calendarTraner == null) ? TextWidget(
+                  text: 'HLV: ${controller.calendar.calendarTraner?.first.name ?? 'Chưa có'}',
                   fontWeight: FontWeight.bold,
-                ),
+                ) : Container(),
                 const SizedBox(
                   height: 10,
                 ),

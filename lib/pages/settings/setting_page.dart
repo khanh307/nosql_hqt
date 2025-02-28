@@ -1,3 +1,5 @@
+import 'package:fitness_tracker/pages/calendar_suggestions/calendar_suggestion_page.dart';
+import 'package:fitness_tracker/pages/menu_suggestions/menu_suggestions_page.dart';
 import 'package:fitness_tracker/pages/settings/setting_controller.dart';
 import 'package:fitness_tracker/widgets/custom_container.dart';
 import 'package:fitness_tracker/widgets/text_widget.dart';
@@ -22,18 +24,37 @@ class SettingPage extends GetView<SettingController> {
             const SizedBox(
               height: 20,
             ),
-            // CustomContainer(
-            //   child: Row(
-            //     children: [
-            //       Image.asset('assets/images/account.png', width: 50),
-            //       const SizedBox(
-            //         width: 10,
-            //       ),
-            //       const TextWidget(text: 'Thông tin cá nhân')
-            //     ],
-            //   ),
-            //   onTap: () {},
-            // ),
+            CustomContainer(
+              child: Row(
+                children: [
+                  Image.asset('assets/images/account.png', width: 50),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const TextWidget(text: 'Gợi ý lịch tập')
+                ],
+              ),
+              onTap: () {
+                  Get.toNamed(CalendarSuggestionPage.routeName);
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            CustomContainer(
+              child: Row(
+                children: [
+                  Image.asset('assets/images/foods.png', width: 50),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const TextWidget(text: 'Gợi ý thực đơn')
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(MenuSuggestionsPage.routeName);
+              },
+            ),
             const SizedBox(
               height: 10,
             ),

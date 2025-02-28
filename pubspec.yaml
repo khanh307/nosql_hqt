@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: '>=3.0.6 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -60,6 +60,10 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   weekly_date_picker: ^1.4.2
   syncfusion_flutter_charts: ^22.2.12
+  openai_dart: ^0.4.5
+  mistralai_dart: ^0.0.3+4
+  flutter_dotenv: ^5.2.1
+  flutter_widget_from_html: ^0.16.0
 
 
 
@@ -100,6 +104,7 @@ flutter:
     - assets/dialog/
     - assets/images/
     - assets/jsons/
+    - assets/app.env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

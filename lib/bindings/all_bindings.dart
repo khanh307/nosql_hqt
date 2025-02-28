@@ -3,6 +3,9 @@ import 'package:fitness_tracker/pages/body_indices/new_indices/new_indices_contr
 import 'package:fitness_tracker/pages/body_part/body_part_controller.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_controller.dart';
 import 'package:fitness_tracker/pages/calendar/calendar_detail/calendar_detail_controller.dart';
+import 'package:fitness_tracker/pages/calendar_suggestions/calendar_suggestion_controller.dart';
+import 'package:fitness_tracker/pages/menu_suggestions/menu_suggestions_controller.dart';
+
 import 'package:get/get.dart';
 
 import '../pages/auth/login/login_controller.dart';
@@ -30,5 +33,7 @@ class AllBindings extends Bindings {
     Get.lazyPut(() => CalendarDetailController());
     Get.lazyPut(() => BodyIndicesController());
     Get.lazyPut(() => NewIndicesController());
+    Get.lazyPut(() => CalendarSuggestionController());
+    Get.lazyPut(() => MenuSuggestionsController());
   }
 }

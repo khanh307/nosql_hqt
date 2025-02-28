@@ -5,6 +5,8 @@ import 'package:fitness_tracker/pages/calendar/calendar_detail/calendar_detail_p
 import 'package:fitness_tracker/pages/calendar/calendar_page.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/exercise_picker/exercise_picker_page.dart';
 import 'package:fitness_tracker/pages/calendar/new_calendar/member_picker/member_picker_page.dart';
+import 'package:fitness_tracker/pages/calendar_suggestions/calendar_suggestion_page.dart';
+import 'package:fitness_tracker/pages/menu_suggestions/menu_suggestions_page.dart';
 import 'package:get/get.dart';
 
 import '../bindings/all_bindings.dart';
@@ -103,6 +105,18 @@ class AppRoutes {
     GetPage(
       name: NewIndicesPage.routeName,
       page: () => const NewIndicesPage(),
+      binding: AllBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: CalendarSuggestionPage.routeName,
+      page: () => const CalendarSuggestionPage(),
+      binding: AllBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: MenuSuggestionsPage.routeName,
+      page: () => const MenuSuggestionsPage(),
       binding: AllBindings(),
       transition: Transition.rightToLeft,
     ),

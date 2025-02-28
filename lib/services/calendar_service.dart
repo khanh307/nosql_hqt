@@ -130,7 +130,7 @@ class CalendarService extends BaseService {
   }
 
   Future<List<CalendarModel>> getCalendarForStudent(
-      {required DateTime date, required UserModel student}) async {
+      {required DateTime date, required UserModel student, int days = 1}) async {
     DateTime startOfDay = date.copyWith(
         year: date.year,
         month: date.month,
@@ -141,7 +141,7 @@ class CalendarService extends BaseService {
         millisecond: 0,
         microsecond: 0);
     DateTime endOfDay = startOfDay
-        .add(const Duration(days: 1))
+        .add(Duration(days: days))
         .subtract(const Duration(microseconds: 1));
     List<CalendarModel> result = [];
     await firestore

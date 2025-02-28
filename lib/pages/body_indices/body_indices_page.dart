@@ -52,7 +52,7 @@ class BodyIndicesPage extends GetView<BodyIndicesController> {
                   title: 'Ngày sinh',
                   content: DateUtil.formatDateNotHH(
                       controller.student.usersStudent!.birthday!)),
-              Divider(),
+              const Divider(),
               const TextWidget(
                 text: 'Chỉ số',
                 fontWeight: FontWeight.bold,

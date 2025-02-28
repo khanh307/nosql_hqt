@@ -26,7 +26,6 @@ class StudentModel extends UserModel{
         studentCalendar?.add(CalendarModel.fromJson(v));
       });
     }
-
     usersStudent = UserModel.fromJson(json['Users_Student']);
   }
 

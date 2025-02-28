@@ -26,7 +26,6 @@ class NewIndicesController extends GetxController {
   void onInit() {
     super.onInit();
     dateSelected = DateTime(now.year, now.month, now.day);
-    print('dateSelected ${dateSelected}');
     if (student.studentBodyIndices != null &&
         student.studentBodyIndices!.isNotEmpty) {
       heightController.text =
