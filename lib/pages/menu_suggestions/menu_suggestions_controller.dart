@@ -119,6 +119,7 @@ class MenuSuggestionsController extends GetxController {
       resultAI.value = res.choices.first.message.content ?? '';
       resultAI.value = resultAI.value.replaceAll('```', '');
       resultAI.value = resultAI.value.replaceFirst('html', '');
+      resultAI.value = resultAI.value.replaceAll(RegExp(r'<title>.*?</title>'), '');
       DialogUtil.hideLoading();
       pageController.nextPage(
           duration: const Duration(milliseconds: 200), curve: Curves.linear);
