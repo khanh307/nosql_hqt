@@ -129,6 +129,7 @@ class CalendarService extends BaseService {
     return result;
   }
 
+
   Future<List<CalendarModel>> getCalendarForStudent(
       {required DateTime date, required UserModel student, int days = 1}) async {
     DateTime startOfDay = date.copyWith(
@@ -144,6 +145,7 @@ class CalendarService extends BaseService {
         .add(Duration(days: days))
         .subtract(const Duration(microseconds: 1));
     List<CalendarModel> result = [];
+    print('startOfDay $startOfDay -- endOfDay $endOfDay');
     await firestore
         .collection(Constants.calendarCollection)
         .where(Constants.calendarStudent, arrayContains: student.toJson())

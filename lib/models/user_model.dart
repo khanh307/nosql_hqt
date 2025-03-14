@@ -9,6 +9,7 @@ class UserModel {
     this.password,
     this.phone,
     this.sex,
+    this.token
   });
 
   UserModel.fromJson(dynamic json) {
@@ -19,6 +20,7 @@ class UserModel {
     password = json['Password'];
     phone = json['Phone'];
     sex = json['Sex'];
+    token = json['Token'];
   }
 
   UserModel.fromJsonUseDateTime(dynamic json) {
@@ -29,6 +31,7 @@ class UserModel {
     password = json['Password'];
     phone = json['Phone'];
     sex = json['Sex'];
+    token = json['Token'];
   }
 
   String? id;
@@ -38,6 +41,7 @@ class UserModel {
   String? password;
   String? phone;
   bool? sex;
+  String? token;
 
   UserModel copyWith({
     String? id,
@@ -66,6 +70,7 @@ class UserModel {
     map['Password'] = password;
     map['Phone'] = phone;
     map['Sex'] = sex;
+    map['Token'] = token;
     return map;
   }
 
@@ -78,6 +83,7 @@ class UserModel {
     map['Password'] = password;
     map['Phone'] = phone;
     map['Sex'] = sex;
+    map['Token'] = token;
     return map;
   }
 

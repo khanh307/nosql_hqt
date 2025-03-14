@@ -37,10 +37,10 @@ class MenuSuggestionsController extends GetxController {
             (value) {
           if (value != null) {
             student.value = value;
-            print('birthday ${student.value!.usersStudent!.birthday}');
             if (student.value!.usersStudent!.birthday != null) {
               ageController.text = (DateTime.now().year - student.value!.usersStudent!.birthday!.year).toString();
             }
+            print('studentBodyIndices ${student.value!.studentBodyIndices}');
             DialogUtil.hideLoading();
           }
         },
@@ -84,7 +84,7 @@ class MenuSuggestionsController extends GetxController {
 
   Future suggesMenu() async {
     DialogUtil.showLoading();
-    try {
+    // try {
       BodyIndicesModel? body;
       if (student.value != null && student.value!.studentBodyIndices != null && student.value!.studentBodyIndices!.isNotEmpty) {
         body = student.value!.studentBodyIndices!.last;
@@ -123,9 +123,9 @@ class MenuSuggestionsController extends GetxController {
       DialogUtil.hideLoading();
       pageController.nextPage(
           duration: const Duration(milliseconds: 200), curve: Curves.linear);
-    } catch (e) {
-      DialogUtil.hideLoading();
-      DialogUtil.showDialogError(text: 'Lỗi trong quá trình gợi ý thực đơn');
-    }
+    // } catch (e) {
+    //   DialogUtil.hideLoading();
+    //   DialogUtil.showDialogError(text: 'Lỗi trong quá trình gợi ý thực đơn');
+    // }
   }
 }

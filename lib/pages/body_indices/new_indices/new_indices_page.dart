@@ -22,78 +22,80 @@ class NewIndicesPage extends GetView<NewIndicesController> {
         appBar: AppBar(
           title: const Text('Thêm chỉ số'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Form(
-            key: controller.globalKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                DatePickerWidget(
-                  value: controller.dateSelected,
-                  onChanged: (value) {
-                    controller.dateSelected = value;
-                  },
-                  labelText: 'Ngày đo',
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputWidget(
-                  labelText: 'Weight (kg)',
-                  controller: controller.weightController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return ValidationEditText.validationRequired(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputWidget(
-                  labelText: 'Height (cm)',
-                  controller: controller.heightController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return ValidationEditText.validationRequired(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputWidget(
-                  labelText: 'Body fat (%)',
-                  controller: controller.bodyFatController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return ValidationEditText.validationRequired(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputWidget(
-                  labelText: 'Muscle Mass (kg)',
-                  controller: controller.muscleController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return ValidationEditText.validationRequired(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InputWidget(
-                  labelText: 'BMI (kg/m²)',
-                  controller: controller.bmiController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return ValidationEditText.validationRequired(value);
-                  },
-                ),
-              ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Form(
+              key: controller.globalKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  DatePickerWidget(
+                    value: controller.dateSelected,
+                    onChanged: (value) {
+                      controller.dateSelected = value;
+                    },
+                    labelText: 'Ngày đo',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InputWidget(
+                    labelText: 'Weight (kg)',
+                    controller: controller.weightController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return ValidationEditText.validationRequired(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InputWidget(
+                    labelText: 'Height (cm)',
+                    controller: controller.heightController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return ValidationEditText.validationRequired(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InputWidget(
+                    labelText: 'Body fat (%)',
+                    controller: controller.bodyFatController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return ValidationEditText.validationRequired(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InputWidget(
+                    labelText: 'Muscle Mass (kg)',
+                    controller: controller.muscleController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return ValidationEditText.validationRequired(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InputWidget(
+                    labelText: 'BMI (kg/m²)',
+                    controller: controller.bmiController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return ValidationEditText.validationRequired(value);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -102,7 +104,7 @@ class NewIndicesPage extends GetView<NewIndicesController> {
           child: ButtonWidget(
             text: 'Tiếp tục',
             onPressed: () async {
-
+              await controller.newBodyIndices();
             },
           ),
         ),

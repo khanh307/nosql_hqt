@@ -55,7 +55,9 @@ class BodyIndicesModel {
     map['Height'] = height;
     map['Muscle'] = muscle;
     map['Weight'] = weight;
-    map['Date'] = Timestamp.fromDate(date!);
+    if (date != null) {
+      map['Date'] = Timestamp.fromDate(date!);
+    }
     return map;
   }
 

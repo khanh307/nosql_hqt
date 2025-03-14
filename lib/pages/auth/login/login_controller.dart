@@ -4,6 +4,7 @@ import 'package:fitness_tracker/models/student_model.dart';
 import 'package:fitness_tracker/models/traniner_model.dart';
 import 'package:fitness_tracker/models/user_model.dart';
 import 'package:fitness_tracker/pages/bottom_nav/bottom_nav_page.dart';
+import 'package:fitness_tracker/services/fcm_service.dart';
 import 'package:fitness_tracker/services/user_service.dart';
 
 import 'package:fitness_tracker/utils/check_version.dart';
@@ -52,8 +53,9 @@ class LoginController extends GetxController {
               username: usernameController.text, password: passwordHash)
           .then(
         (value) async {
-          print('Đăng nhập ${value.toString()}');
           Singleton().saveLogin(value!);
+          String token = await FCMService.getToken() ?? '';
+          await _userService.updateTokenFCM(id: value.id!, token: token)  ;
           DialogUtil.hideLoading();
           Get.offAndToNamed(BottomNavPage.routeName);
         },

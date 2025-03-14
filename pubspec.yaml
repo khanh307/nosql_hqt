@@ -64,6 +64,8 @@ dependencies:
   mistralai_dart: ^0.0.3+4
   flutter_dotenv: ^5.2.1
   flutter_widget_from_html: ^0.16.0
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
 
 
 

@@ -20,7 +20,7 @@ class MenuSuggestionsPage extends GetView<MenuSuggestionsController> {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Obx(() => (controller.student.value == null ||
-            controller.student.value!.studentBodyIndices == null) ? PageView(
+            controller.student.value!.studentBodyIndices == null || controller.student.value!.studentBodyIndices!.isEmpty) ? PageView(
           controller: controller.pageController,
           children: [
             BodyIndicesView(),

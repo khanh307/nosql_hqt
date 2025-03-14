@@ -120,10 +120,18 @@ class UserService extends BaseService {
       result = await getTrainerById(value.docs.first.id);
       result ??= await getStudentById(value.docs.first.id);
       result ??= UserModel.fromJson(value.docs.first.data());
+
     }).onError((error, stackTrace) {
       throw BadRequestException(error.toString());
     });
     return result;
+  }
+
+  Future updateTokenFCM({required String id, required String token}) async {
+    await firestore
+        .collection(Constants.userCollection)
+        .doc(id)
+        .update({'Token': token});
   }
 
   Future<TrainerModel?> getTrainerById(String id) async {

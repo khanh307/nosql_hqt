@@ -56,11 +56,7 @@ class LoginPage extends GetView<LoginController> {
             ],
           ),
         ),
-        bottomNavigationBar: const TextWidget(
-          text: 'Powered by Quoc Thao Ho',
-          color: AppColors.textColor,
-          textAlign: TextAlign.center,
-        ),
+
       ),
     );
   }

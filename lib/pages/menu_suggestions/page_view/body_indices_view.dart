@@ -15,8 +15,10 @@ class BodyIndicesView extends GetView<MenuSuggestionsController> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           const TextWidget(text: 'Không tìm thấy chỉ số body của bạn. Bạn vui lòng nhập các chỉ số sau để chúng tôi gợi ý'),
+          const SizedBox(height: 20,),
           InputWidget(
             labelText: 'Weight (kg)',
             controller: controller.weightController,
@@ -69,6 +71,7 @@ class BodyIndicesView extends GetView<MenuSuggestionsController> {
               return ValidationEditText.validationRequired(value);
             },
           ),
+          const SizedBox(height: 30,),
           ButtonWidget(
             text: 'Tiếp tục',
             icon: const Icon(
